@@ -7,6 +7,7 @@ int main(){
       printf("*");
     }
     printf("\n");
+    printf("This is a short answer.\n");
   }
   return 0;
 }
