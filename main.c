@@ -8,7 +8,7 @@ int main(){
     }
     printf("\n");
     printf("This is a short answer.\n");
-    printf("The autumn sky is clear.\n);
+    printf("The autumn sky is clear.\n");
   }
   return 0;
 }
