@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <time.h>
+#include <Windows.h>
 
 int init(int, int);                 // 묵찌빠 동작함수 
 int battle(int, int);               // 가위바위보 실행함수
@@ -9,7 +10,7 @@ int printRPS(int, int);
 int ComSelect();                    // 컴퓨터의 난수생성함수
 int Exit();                         // 종료명령호출 함수
 
-void main()
+int MJB_game(int coin)
 {
     int user, com;
     int result;                     // 최종결과, 유저가 이기면 7 지면 8 저장
@@ -38,7 +39,7 @@ void main()
             printf("현재 %d전 %d승 %d패", mjbcount, winloss[1], winloss[0]);
         }
     }
-    init(user, com);                    // 사용자가 종료명령어 입력하전까지 반복
+    int MJB_game(int coin);                   // 사용자가 종료명령어 입력하전까지 반복
 }
 
 int init(int user, int com)
@@ -66,9 +67,13 @@ int init(int user, int com)
         comSelect = ComSelect();                            // 1~3에서의 난수 추출뒤 저장
         int printRPS(int userSelect, int comSelect); {
             printf("---------------결과--------------\n");
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
             printf("\n사용자는 %s를 냈습니다\n\n", (userSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : userSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+            printf("컴퓨터의 선택 대기중 . . . ");
+            Sleep(1000);
             printf("\n컴퓨터는 %s를냈습니다\n\n", (comSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : comSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
-            printf("%d, %d", userSelect, comSelect);}
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15)
         if (comSelect == userSelect)                        // 가위바위보의 경우에 따라 res에 값 저장
                                                             // 0 =  짐, 1 = 비김, 2 = 이김
         {                                                   //가위바위보 로직 가위 = 1 바위 = 2 보 = 3
@@ -121,10 +126,14 @@ int battle(int winner, int loser) {
         scanf("%d", &winnerSelect);
         loserSelect = ComSelect();
         printf("---------------결과--------------\n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2); 
         printf("\n사용자는 %s를 냈습니다\n\n", (winnerSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : winnerSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+        printf("컴퓨터의 선택 대기중 . . . ");
+        Sleep(1000);
         printf("\n컴퓨터는 %s를냈습니다\n\n", (loserSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : loserSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
-        printf("%d, %d", winnerSelect, loserSelect);
-
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        
         //printf("\n사용자는 %s를 냈습니다\n\n", (winnerSelect == 1 ? "가위" : winnerSelect == 2 ? "바위" : "보"));
        // printf("\n컴퓨터는 %s를냈습니다\n", (loserSelect == 1 ? "가위" : loserSelect == 2 ? "바위" : "보"));
        // printf("%d, %d\n", winnerSelect, loserSelect);
@@ -133,10 +142,13 @@ int battle(int winner, int loser) {
         scanf("%d", &loserSelect);
         winnerSelect = ComSelect();
         printf("---------------결과--------------\n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2); 
         printf("\n사용자는 %s를 냈습니다\n\n", (loserSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : loserSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+        printf("컴퓨터의 선택 대기중 . . . ");
+        Sleep(1000);
         printf("\n컴퓨터는 %s를냈습니다\n\n", (winnerSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : winnerSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
-     
-        printf("%d, %d", winnerSelect, loserSelect);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15)
 
         //printf("\n사용자는 %s를 냈습니다\n\n", (loserSelect == 1 ? "가위" : loserSelect == 2 ? "바위" : "보"));
         //printf("\n컴퓨터는 %s를냈습니다\n", (winnerSelect == 1 ? "가위" : winnerSelect == 2 ? "바위" : "보"));
