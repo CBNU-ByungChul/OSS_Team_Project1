@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <Windows.h>
 
 extern int total;
 extern int cur;
@@ -61,30 +62,32 @@ int rcp(int coin)
                 break;
             cur = total - betcoin;
         }
-       A:
         com = rand() % 3 + 1;
         printf(" -- / 1 : 가위  / 2 : 바위 / 3 : 보 / -- \n");
         scanf("%s", input);
         user = atoi(&input);
+        printf("---------------결과--------------\n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+        printf("\n유저의 선택\n %s\n\n", (user == 1 ? "\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■■■■■□□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■□□" : user == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■□□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■□□" : "\n□□□■□■□■□■\n□□□■□■□■□■\n□□□■□■□■□■\n■□□■□■□■□■\n■■□■□■□■□■\n■■■■■■■■■■\n■■■■■■■■■■\n■■■■■■■■■■\n□■■■■■■■■■\n□□■■■■■■■■"));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+        printf("\n컴퓨터의 선택\n  %s\n\n", (com == 1 ? "\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■□□■■□□\n□□■■■■■■□□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■□□" : com == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■□□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■□□" : "\n□□□■□■□■□■\n□□□■□■□■□■\n□□□■□■□■□■\n■□□■□■□■□■\n■■□■□■□■□■\n■■■■■■■■■■\n■■■■■■■■■■\n■■■■■■■■■■\n□■■■■■■■■■\n□□■■■■■■■■"));
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+
         if (strcmp(input, "exit") == 0)
             break;
         if (user == com)
         {
-            printf("컴퓨터의 선택 : %d\n", com);
-            printf("컴퓨터와 비겼습니다. 재경기를 진행합니다.\n\n");
-            goto A;
+            printf("컴퓨터와 비겼습니다. 재경기를 진행합니다.\n");
             retry();
         }
         else if ((user == 1 && com == 2) || (user == 2 && com == 3) || (user == 3 && com == 1))
         {
-            printf("컴퓨터의 선택 : %d\n", com);
             printf("패배하셨습니다.\n");
             total = cur;
             retry();
         }
         else if ((user == 1 && com == 3) || (user == 2 && com == 1) || (user == 3 && com == 2))
         {
-            printf("컴퓨터의 선택 : %d\n", com);
             printf("승리하셨습니다.\n");
             total = cur + betcoin * 2;
             printf("%d 코인 획득\n", betcoin * 2);
