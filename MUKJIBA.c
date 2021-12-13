@@ -102,7 +102,15 @@ int init(int user, int com)
     scanf("%d", &userSelect);                           // 1~3중에서 유저의 선택 저장
     comSelect = ComSelect();                            // 1~3에서의 난수 추출뒤 저장
     printfRes(userSelect, comSelect);
-    if (comSelect == userSelect)                        // 가위바위보의 경우에 따라 res에 값 저장
+    if (userSelect > 3 ) {
+        printf("1~3사이의 값을 정확히 입력하세요!\n");
+        init(user, com);
+    }
+    else if (userSelect < 1) {
+        printf("1~3사이의 값을 정확히 입력하세요!\n");
+        init(user, com);
+    }
+    else if (comSelect == userSelect)                        // 가위바위보의 경우에 따라 res에 값 저장
                                                         // 0 =  짐, 1 = 비김, 2 = 이김
                                                         //가위바위보 로직 가위 = 1 바위 = 2 보 = 3
                                                         //비기는 경우는 (1,1) (2,2) (3,3) 이기 때문에 comSelect, userSelect 서로 같은 경우
@@ -160,7 +168,15 @@ int battle(int winner, int loser) {
         winnerSelect = ComSelect();
         printfRes(loserSelect, winnerSelect);
     }
-    if (winnerSelect == loserSelect)
+    if (winnerSelect > 3 || loserSelect >3) {
+        printf("1~3사이의 값을 정확히 입력하세요!\n");
+        battle(winner, loser);
+    }
+    else if (winnerSelect < 1 || loserSelect <1) {
+        printf("1~3사이의 값을 정확히 입력하세요!\n");
+        battle(winner, loser);
+    }
+    else if (winnerSelect == loserSelect)
         res = 1;
     else if ((loserSelect == 3) && (winnerSelect == 2))
     {
@@ -191,7 +207,7 @@ int battle(int winner, int loser) {
 int ComSelect() {                                           //컴퓨터의 난수생성함수
     int randomSelect;
 
-    srand((unsigned int)time(NULL));
+    srand(time(NULL));
     randomSelect = rand() % 3 + 1;
 
     return randomSelect;
