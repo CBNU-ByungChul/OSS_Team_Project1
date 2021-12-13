@@ -44,7 +44,7 @@ void rule_rcp()
 int rcp(int coin)
 {
     char input[100];
-    int user = 0;
+    int user = 0, empty=0;
     int com;
     srand((unsigned)time(NULL));
     cnt = 0;
@@ -87,6 +87,11 @@ int rcp(int coin)
             total = cur + betcoin * 2;
             printf("%d 코인 획득\n", betcoin * 2);
             retry();
+        }
+        if (total <= 0)
+        {
+            broke();
+            break;
         }
         cnt = 0;
     }        
