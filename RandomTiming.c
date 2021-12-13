@@ -73,7 +73,7 @@ int randomtiming(int coin) {
 
 		if (re == 0)
 		{
-			betcoin = betting(coin);
+			betcoin = betting(total);
 			if (betcoin == -1)
 				break;
 			cur = total - betcoin;
