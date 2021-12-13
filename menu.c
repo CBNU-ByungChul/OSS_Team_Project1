@@ -4,8 +4,9 @@
 #include <math.h>
 #include <windows.h>
 
-int coin = 10000;
+int coin;
 int game = 0;
+int count4profile = 0;
 
 void menu()
 {
@@ -29,7 +30,10 @@ int main()
 
 	while (sel != 6)
 	{
-		//coin = profile();
+		if (count4profile == 0) {
+			count4profile++;
+			coin = profile();
+		}
 		system("cls");
 		menu();
 		scanf("%d", &sel);
@@ -69,6 +73,7 @@ int main()
 			a = 0;
 		}
 	}
-
+	system("copy data.txt temp.txt");
+	save_profile(coin);
 	return 0;
 }
