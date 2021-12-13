@@ -55,7 +55,7 @@ int rcp(int coin)
         rule_rcp();
         if (re == 0)
         {
-            betcoin = betting(coin);
+            betcoin = betting(total);
             if (betcoin == -1)
                 break;
             cur = total - betcoin;
