@@ -65,6 +65,8 @@ int rcp(int coin)
         printf(" -- / 1 : 가위  / 2 : 바위 / 3 : 보 / -- \n");
         scanf("%s", input);
         user = atoi(&input);
+        if (strcmp(input, "exit") == 0)
+            break;
         if (user == com)
         {
             printf("컴퓨터의 선택 : %d\n", com);
