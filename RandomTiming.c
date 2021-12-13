@@ -62,7 +62,7 @@ int RandomTime() {
 int randomtiming(int coin) {
 	int num,time,input_num=0;
 	char input[100];
-	int exit=0;
+	int exit=0,empty=0;
 	double start, end,taken_time;
 	cnt = 0;
 	total = coin;
@@ -124,9 +124,19 @@ int randomtiming(int coin) {
 			}
 			retry();
 			cnt = 0;
+			if (total <= 0)
+			{
+				empty = 1;
+				break;
+			}
 		}
 		if (exit == 1)
 			break;
+		if (empty == 1)
+		{
+			broke();
+			break;
+		}
 	}
 	return total;
 }
