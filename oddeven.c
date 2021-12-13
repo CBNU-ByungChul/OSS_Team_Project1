@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <math.h>
 #include <ctype.h>
+#include <windows.h>
 
 #define MAX 100
 int total = 0;
@@ -45,15 +46,13 @@ void rule_oddeven()
 
 void retry()
 {
-	printf("아무키나 눌러 재시작\n");
-	_getch();
+	system("pause");
 }
 
 void broke()
 {
 	printf("남은 코인이 없습니다.\n");
-	printf("아무키나 눌러 계속\n");
-	_getch();
+	system("pause");
 }
 
 int betting(int coin)
@@ -92,6 +91,10 @@ int betting(int coin)
 		printf("보유 코인 : %d\n", total);
 		printf("배팅할 코인을 입력하세요 : ");
 		scanf("%s", bet);
+		if (strcmp(bet, "exit") == 0)
+		{
+			return -1;
+		}
 		printf("----------------\n");
 
 		bett = atoi(&bet[0]);
@@ -202,6 +205,12 @@ int oddeven(int coin)
 		cnt = 0;
 		re = 0;
 		coin = total;
+		if (total <= 0)
+		{
+			total = 0;
+			broke();
+			break;
+		}
 	}
 	return total;
 }
