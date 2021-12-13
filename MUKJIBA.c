@@ -67,7 +67,7 @@ int MJB_game(int coin)
                 system("pause");
                 winloss[0]++;
 //              
-                reward = -0.5* bettcoin;
+                reward = -0.5* bettcoin -1000;
                 printf("com이 승리했습니다 + 1패");
                 printf("현재 %d전 %d승 %d패\n", mgbcount, winloss[1], winloss[0]);
                 printf("코인 득실: %d\n", reward);
@@ -102,21 +102,8 @@ int init(int user, int com)
     scanf("%d", &userSelect);                           // 1~3중에서 유저의 선택 저장
     comSelect = ComSelect();                            // 1~3에서의 난수 추출뒤 저장
     printfRes(userSelect, comSelect);
-    if (userSelect > 3 ) {
-        printf("1~3사이의 값을 정확히 입력하세요!\n");
-        init(user, com);
-    }
-    else if (userSelect < 1) {
-        printf("1~3사이의 값을 정확히 입력하세요!\n");
-        init(user, com);
-    }
-    else if (comSelect == userSelect)                        // 가위바위보의 경우에 따라 res에 값 저장
-                                                        // 0 =  짐, 1 = 비김, 2 = 이김
-                                                        //가위바위보 로직 가위 = 1 바위 = 2 보 = 3
-                                                        //비기는 경우는 (1,1) (2,2) (3,3) 이기 때문에 comSelect, userSelect 서로 같은 경우
-                                                        //유저가 이기는 경우는 (3,2) (2,1) (1,3) 이기에 컴>(유저+1)%3으로 표현 가능
+    if (comSelect == userSelect)                        
         res = 1;
-
     else if ((comSelect == 3) && (userSelect == 2))     // 사용자 2(바위) 컴퓨터 3(보) 일 경우 3>3%3이 참이므로  사용자가 패배했음에도 
                                                         //res = 2 즉 승리했다고 출력되는 것을 확인 위쪽에 이 경우를 대비한 코드 추가
         res = 0;
@@ -168,15 +155,7 @@ int battle(int winner, int loser) {
         winnerSelect = ComSelect();
         printfRes(loserSelect, winnerSelect);
     }
-    if (winnerSelect > 3 || loserSelect >3) {
-        printf("1~3사이의 값을 정확히 입력하세요!\n");
-        battle(winner, loser);
-    }
-    else if (winnerSelect < 1 || loserSelect <1) {
-        printf("1~3사이의 값을 정확히 입력하세요!\n");
-        battle(winner, loser);
-    }
-    else if (winnerSelect == loserSelect)
+    if (winnerSelect == loserSelect)
         res = 1;
     else if ((loserSelect == 3) && (winnerSelect == 2))
     {
@@ -207,7 +186,7 @@ int battle(int winner, int loser) {
 int ComSelect() {                                           //컴퓨터의 난수생성함수
     int randomSelect;
 
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     randomSelect = rand() % 3 + 1;
 
     return randomSelect;
@@ -226,7 +205,7 @@ void RuleMJB()
     system("cls");
     printf("묵찌빠 게임에 오신 것을  환영합니다!\n");
     printf("게임을 시작하기 전에 베팅금액을 입력하고\n");
-    printf("승리하면 1.5배의 패배하면 0.5만큼의 코인을 반환 받게됩니다\n");
+    printf("승리하면 1.5배의 패배하면 0.5만큼의 코인을 반환 받고 1000코인 또한 잃게됩니다\n");
     printf("\n게임 시작 ----- 아무거나 입력\n게임 종료 ----- exit입력\n");
 }
 int MJBbetting(int total)
