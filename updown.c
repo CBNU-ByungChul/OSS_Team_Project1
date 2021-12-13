@@ -134,6 +134,7 @@ int updown(int coin)
 		}
 		else if (rannum == number)
 		{
+			srand((unsigned int)time(NULL));
 			rannum = (rand() % 100) + 1;
 			printf("정답\n");
 			count();
