@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -60,6 +61,8 @@ int RandomTime() {
 
 int randomtiming(int coin) {
 	int num,time,input_num=0;
+	char input[100];
+	int exit=0;
 	double start, end,taken_time;
 	cnt = 0;
 	total = coin;
@@ -86,7 +89,13 @@ int randomtiming(int coin) {
 			printf("%d\n", num);
 
 			start = (double)clock() / 1000;
-			scanf_s("%d", &input_num);
+			scanf("%s", input);
+			input_num = atoi(&input);
+			if (strcmp(input, "exit") == 0)
+			{
+				exit = 1;
+				break;
+			}
 			end = (double)clock() / 1000;
 			taken_time = end - start;
 
@@ -116,6 +125,8 @@ int randomtiming(int coin) {
 			retry();
 			cnt = 0;
 		}
+		if (exit == 1)
+			break;
 	}
 	return total;
 }
