@@ -10,7 +10,7 @@ int MJBbetting(int);
 void RuleMJB();
 void printfRes(int, int);
 int Exit();                         // 종료명령호출 함수
-int total;
+extern int total;
 int count4mjb = 0;
 
 
@@ -19,7 +19,6 @@ int MJB_game(int coin)
     int user, com;
     int result;                     // 최종결과, 유저가 이기면 7 지면 8 저장
     int mgbcount = 0;                  // 게임진행 횟수 저장
-    int total = 0;
     int cur = 0;
     char exit[100];
     int winloss[2] = { 0, };        // winloss[0]에는 유저의 패배수, winloss[1] 유저의 승리수 저장
@@ -46,6 +45,8 @@ int MJB_game(int coin)
         {
             total = coin;
             bettcoin = MJBbetting(total);
+            if (bettcoin == -1)
+                return total;
             system("pause");
             mgbcount++;                     //게임 횟수 카운트
             result = init(user, com);
@@ -92,14 +93,26 @@ int init(int user, int com)
     int res;                            // 유저의 가위바위보 결과를 저장   0 =  짐, 1 = 비김, 2 = 이김
     int userSelect, comSelect;          // 유저, 컴퓨터의 가위바위보 선택저장
     int exit = 1;                       // exit 값이 0이면 종료함수 호출
-
+    char input[100];
+    
     system("cls");
 
     printf("묵찌빠를 시작합니다! \n이긴쪽이 공격권을 갖고 비기면 가위바위보가 다시 진행됩니다!\n");
     printf("---------------------------------\n");
     printf("가위 ----- 1입력\n바위 ----- 2입력\n보 ------- 3입력\n");
 
-    scanf("%d", &userSelect);                           // 1~3중에서 유저의 선택 저장
+    scanf("%s", input);                          // 1~3중에서 유저의 선택 저장
+    userSelect = atoi(&input);
+    while (userSelect != 1 && userSelect != 2 && userSelect != 3)
+    {
+        system("cls");
+        printf("1~3 입력\n");
+        scanf("%s", input);
+        userSelect = atoi(&input);
+        if (userSelect == 1 && userSelect == 2 && userSelect == 3)
+            break;
+    }
+    
     comSelect = ComSelect();                            // 1~3에서의 난수 추출뒤 저장
     printfRes(userSelect, comSelect);
     if (comSelect == userSelect)                        // 가위바위보의 경우에 따라 res에 값 저장
@@ -217,19 +230,7 @@ int MJBbetting(int total)
 {
     int bettcoin = 0;
     system("cls");
-    if (count4mjb >= 1) {
-        printf("보유한 코인 내에서 입력하세요.\n\n");
-    }
-    printf("베팅금액을 입력하세요!\n");
-    printf("현재 보유 코인: %d\n", total);
-    printf("코인 입력: ");
-    scanf("%d", &bettcoin);
-    if (bettcoin > total) {
-        count4mjb++;
-        MJBbetting(total);
+    bettcoin = betting(total);
 
-    }
-    else {
-        return bettcoin;
-    }
+    return bettcoin;
 }
