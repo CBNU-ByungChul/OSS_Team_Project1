@@ -71,7 +71,7 @@ int rcp(int coin)
         if (user == com)
         {
             printf("컴퓨터의 선택 : %d\n", com);
-            printf("컴퓨터와 비겼습니다. 재경기를 진행합니다.\n");
+            printf("컴퓨터와 비겼습니다. 재경기를 진행합니다.\n\n");
             goto A;
             retry();
         }
