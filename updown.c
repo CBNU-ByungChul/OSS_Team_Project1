@@ -188,6 +188,11 @@ int updown(int coin)
 				}
 			}
 		}
+		if (total <= 0) {
+			total = 0;
+			broke();
+			break;
+		}
 	}
 	return total;
 }
