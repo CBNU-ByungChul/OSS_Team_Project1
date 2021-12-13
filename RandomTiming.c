@@ -26,7 +26,7 @@ void rule_randomtiming()
 	}
 	else if (cnt == 1 && re == 0)
 	{
-		printf("홀/짝 입력\n");
+		printf("정확하게 입력하시오.\n");
 		printf("종료 하려면 exit\n");
 		printf("----------------\n");
 		return;
