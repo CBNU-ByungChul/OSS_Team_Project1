@@ -15,7 +15,6 @@ int total;
 
 int MJB_game(int coin)
 {
-    total = coin;
     int user, com;
     int result;                     // 최종결과, 유저가 이기면 7 지면 8 저장
     int mgbcount = 0;                  // 게임진행 횟수 저장
@@ -25,6 +24,7 @@ int MJB_game(int coin)
     int winloss[2] = { 0, };        // winloss[0]에는 유저의 패배수, winloss[1] 유저의 승리수 저장
     int bettcoin = 0;
     int reward = 0;
+    total = coin;
 
     user = 7;
     com = 8;
