@@ -61,6 +61,7 @@ int rcp(int coin)
                 break;
             cur = total - betcoin;
         }
+       A:
         com = rand() % 3 + 1;
         printf(" -- / 1 : 가위  / 2 : 바위 / 3 : 보 / -- \n");
         scanf("%s", input);
@@ -71,6 +72,7 @@ int rcp(int coin)
         {
             printf("컴퓨터의 선택 : %d\n", com);
             printf("컴퓨터와 비겼습니다. 재경기를 진행합니다.\n");
+            goto A;
             retry();
         }
         else if ((user == 1 && com == 2) || (user == 2 && com == 3) || (user == 3 && com == 1))
