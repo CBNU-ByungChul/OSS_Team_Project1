@@ -11,7 +11,6 @@ void RuleMJB();
 void printfRes(int, int);
 int Exit();                         // 종료명령호출 함수
 int total;
-int count4mjb = 0;
 
 
 int MJB_game(int coin)
@@ -21,7 +20,7 @@ int MJB_game(int coin)
     int mgbcount = 0;                  // 게임진행 횟수 저장
     int total = 0;
     int cur = 0;
-    char exit[100];
+    int exit = 1;
     int winloss[2] = { 0, };        // winloss[0]에는 유저의 패배수, winloss[1] 유저의 승리수 저장
     int bettcoin = 0;
     int reward = 0;
@@ -32,13 +31,13 @@ int MJB_game(int coin)
 
 
     while (1)
-    {
-
+    {   
+       
         RuleMJB();
         cur = coin;
         //printf("현재 보유중인 코인: %d\n", coin);
-        scanf("%s", exit);
-        if (strcmp(exit,"exit")==0)
+        scanf("%d", &exit);
+        if (exit == 0)
         {
             return total;
         }
@@ -53,7 +52,6 @@ int MJB_game(int coin)
             {
                 system("pause");
                 winloss[1]++;
- //               
                 reward = 0.5 * bettcoin;
                 printf("user가 승리했습니다 + 1승! ");
                 printf("현재 %d전 %d승 %d패\n", mgbcount, winloss[1], winloss[0]);
@@ -66,18 +64,13 @@ int MJB_game(int coin)
             {
                 system("pause");
                 winloss[0]++;
-//              
-                reward = -0.5* bettcoin;
+                reward = -0.5 * bettcoin;
                 printf("com이 승리했습니다 + 1패");
                 printf("현재 %d전 %d승 %d패\n", mgbcount, winloss[1], winloss[0]);
                 printf("코인 득실: %d\n", reward);
                 total = (cur + reward);
                 coin = total;
                 system("pause");
-            }
-            if (total <= 0) {
-                total = 0;
-                break;
             }
             int MJB_game(int coin);              // 사용자가 종료명령어 입력하전까지 반복
         }
@@ -101,7 +94,7 @@ int init(int user, int com)
 
     scanf("%d", &userSelect);                           // 1~3중에서 유저의 선택 저장
     comSelect = ComSelect();                            // 1~3에서의 난수 추출뒤 저장
-    printfRes(userSelect, comSelect);
+        printfRes(userSelect, comSelect);
     if (comSelect == userSelect)                        // 가위바위보의 경우에 따라 res에 값 저장
                                                         // 0 =  짐, 1 = 비김, 2 = 이김
                                                         //가위바위보 로직 가위 = 1 바위 = 2 보 = 3
@@ -123,7 +116,7 @@ int init(int user, int com)
 
     switch (res) {
     case 1:                                                      // 비겼으므로 init 함수 호출
-
+                                                    
         printf("비겼습니다! 아무키나 누르면 가위바위보를 다시 진행합니다!\n");
         system("pause");
         KO = init(user, com);
@@ -158,7 +151,7 @@ int battle(int winner, int loser) {
     else {
         scanf("%d", &loserSelect);
         winnerSelect = ComSelect();
-        printfRes(loserSelect, winnerSelect);
+        printfRes(loserSelect, winnerSelect);     
     }
     if (winnerSelect == loserSelect)
         res = 1;
@@ -201,6 +194,8 @@ void printfRes(int userSelect, int comSelect) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
     printf("\n사용자는 %s를 냈습니다\n\n", (userSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : userSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+    printf("컴퓨터의 선택 대기중 . . . ");
+    Sleep(1000);
     printf("\n컴퓨터는 %s를냈습니다\n\n", (comSelect == 1 ? "\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□□□■■□■■□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : comSelect == 2 ? "\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□□□□□□□□□\n□□■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□" : "\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n□□■■□■■□■□\n■□■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n■■■■■■■■■□\n□■■■■■■■■□\n□□■■■■■■■□"));
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
@@ -208,28 +203,26 @@ void printfRes(int userSelect, int comSelect) {
 void RuleMJB()
 {
     system("cls");
-    printf("묵찌빠 게임에 오신 것을  환영합니다!\n");
+    printf("묵찌빠 게임에 오신 것을   환영합니다!\n");
     printf("게임을 시작하기 전에 베팅금액을 입력하고\n");
     printf("승리하면 1.5배의 패배하면 0.5만큼의 코인을 반환 받게됩니다\n");
-    printf("\n게임 시작 ----- 아무거나 입력\n게임 종료 ----- exit입력\n");
+    printf("\n게임 시작 ----- 아무거나 입력(0빼고)\n게임 종료 ----- 0입력\n");
 }
 int MJBbetting(int total)
 {
     int bettcoin = 0;
     system("cls");
-    if (count4mjb >= 1) {
-        printf("보유한 코인 내에서 입력하세요.\n\n");
-    }
     printf("베팅금액을 입력하세요!\n");
     printf("현재 보유 코인: %d\n", total);
     printf("코인 입력: ");
     scanf("%d", &bettcoin);
-    if (bettcoin > total) {
-        count4mjb++;
-        MJBbetting(total);
-
+    if (bettcoin > total)
+    {
+        system("cls");
+        printf("보유 코인 내에서 입력하세요.\n");
+        printf("현재 보유 코인: %d\n", total);
+        printf("코인 입력: ");
+        scanf("%d", &bettcoin);
     }
-    else {
-        return bettcoin;
-    }
+    return bettcoin;
 }
