@@ -26,7 +26,7 @@ void rule_rcp()
     }
     else if (cnt == 1 && re == 0)
     {
-        printf("홀/짝 입력\n");
+        printf(" -- / 1 : 가위  / 2 : 바위 / 3 : 보 / --  입력\n");
         printf("종료 하려면 exit\n");
         printf("----------------\n");
         return;
