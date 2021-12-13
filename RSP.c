@@ -26,7 +26,7 @@ void rule_rcp()
     }
     else if (cnt == 1 && re == 0)
     {
-        printf(" -- / 1 : 가위  / 2 : 바위 / 3 : 보 / --  입력\n");
+        printf("홀/짝 입력\n");
         printf("종료 하려면 exit\n");
         printf("----------------\n");
         return;
@@ -36,7 +36,7 @@ void rule_rcp()
         re = 0;
         printf("보유 코인 : %d\n", total);
         printf("배팅할 코인을 입력하세요 : %d\n", total - cur);
-        rule_oddeven();
+        rule_rcp();
         printf("정확하게 입력하세요.\n");
     }
 }
@@ -44,7 +44,7 @@ void rule_rcp()
 int rcp(int coin)
 {
     char input[100];
-    int user = 0, empty=0;
+    int user=0;
     int com;
     srand((unsigned)time(NULL));
     cnt = 0;
@@ -53,6 +53,7 @@ int rcp(int coin)
     {
         system("cls");
         rule_rcp();
+
         if (re == 0)
         {
             betcoin = betting(total);
@@ -60,7 +61,6 @@ int rcp(int coin)
                 break;
             cur = total - betcoin;
         }
-        
         com = rand() % 3 + 1;
         printf(" -- / 1 : 가위  / 2 : 바위 / 3 : 보 / -- \n");
         scanf("%s", input);
@@ -73,7 +73,7 @@ int rcp(int coin)
             printf("컴퓨터와 비겼습니다. 재경기를 진행합니다.\n");
             retry();
         }
-       else if ((user == 1 && com == 2) || (user == 2 && com == 3) || (user == 3 && com == 1))
+        else if ((user == 1 && com == 2) || (user == 2 && com == 3) || (user == 3 && com == 1))
         {
             printf("컴퓨터의 선택 : %d\n", com);
             printf("패배하셨습니다.\n");
@@ -88,12 +88,12 @@ int rcp(int coin)
             printf("%d 코인 획득\n", betcoin * 2);
             retry();
         }
-        if (total <= 0)
-        {
+        cnt = 0;
+        if (total <= 0) {
+            total = 0;
             broke();
             break;
         }
-        cnt = 0;
-    }        
+    }
     return total;
 }
