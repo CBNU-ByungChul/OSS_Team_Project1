@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <windows.h>
 
 int coin = 10000;
 int game = 0;
@@ -24,9 +25,11 @@ int main()
 {
 	int sel = 0;
 	int sel2 = 0;
+	int a = 0;
 
 	while (sel != 6)
 	{
+		//coin = profile();
 		system("cls");
 		menu();
 		scanf("%d", &sel);
@@ -54,25 +57,17 @@ int main()
 			coin = MJB_game(coin);
 			break;
 		}
-
 		if (coin <= 0)
 		{
 			system("cls");
 			printf("--------------\n");
-			printf("코인을 모두 잃었습니다.\n");
-			printf("1. 다시 시작\n");
-			printf("2. 종료\n");
+			printf("코인이 없습니다.\n"); 
+			printf("다시 10000코인을 지급합니다\n");
 			printf("--------------\n");
-			scanf("%d", &sel2);
-			switch (sel2 != 2)
-			{
-			case 1:
-				coin = 10000;
-				break;
-			}
+			system("pause");
+			coin = 10000;
+			a = 0;
 		}
-		if (coin == 0)
-			break;
 	}
 
 	return 0;
