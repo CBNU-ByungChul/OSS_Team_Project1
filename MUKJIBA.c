@@ -54,7 +54,7 @@ int MJB_game(int coin)
                 system("pause");
                 winloss[1]++;
  //               
-                reward = 0.5 * bettcoin;
+                reward = bettcoin;
                 printf("user가 승리했습니다 + 1승! ");
                 printf("현재 %d전 %d승 %d패\n", mgbcount, winloss[1], winloss[0]);
                 printf("코인 득실: +%d\n", reward);
@@ -67,7 +67,7 @@ int MJB_game(int coin)
                 system("pause");
                 winloss[0]++;
 //              
-                reward = -0.5* bettcoin -1000;
+                reward = -bettcoin;
                 printf("com이 승리했습니다 + 1패");
                 printf("현재 %d전 %d승 %d패\n", mgbcount, winloss[1], winloss[0]);
                 printf("코인 득실: %d\n", reward);
@@ -205,7 +205,7 @@ void RuleMJB()
     system("cls");
     printf("묵찌빠 게임에 오신 것을  환영합니다!\n");
     printf("게임을 시작하기 전에 베팅금액을 입력하고\n");
-    printf("승리하면 1.5배의 패배하면 0.5만큼의 코인을 반환 받고 1000코인 또한 잃게됩니다\n");
+    printf("승리하면 2배의 코인을얻고 패배하면 전부 잃게됩니다\n");
     printf("\n게임 시작 ----- 아무거나 입력\n게임 종료 ----- exit입력\n");
 }
 int MJBbetting(int total)
