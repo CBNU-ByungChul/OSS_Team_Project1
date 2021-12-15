@@ -105,7 +105,7 @@ int betting(int coin)
 void odd(int coin)
 {
 	srand((unsigned int)time(NULL));
-	int number = rand() % 20 + 1;
+	int number = rand() % 2;
 
 	if (number % 2 != 0)
 	{
@@ -129,7 +129,7 @@ void odd(int coin)
 void even(int coin)
 {
 	srand((unsigned int)time(NULL));
-	int number = rand() % 20 + 1;
+	int number = rand() % 2;
 
 	if (number % 2 == 0)
 	{
